@@ -25,7 +25,8 @@ namespace wdw
     // functions
     bool init();
     void free();
-    void clearScreen();
+    void clearScreen(int r, int g, int b, int a);
+    void presentRender();
 
     SDL_Renderer *getRenderer() const;
 

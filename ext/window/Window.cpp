@@ -10,6 +10,9 @@ namespace wdw
     mTitle = "Window";
     mWidth = 900;
     mHeight = 600;
+
+    window = nullptr;
+    renderer = nullptr;
   }
 
   Window::Window(const string &title, int w, int h)
@@ -17,6 +20,9 @@ namespace wdw
     mTitle = title;
     mWidth = w;
     mHeight = h;
+
+    window = nullptr;
+    renderer = nullptr;
   }
 
   Window::~Window()
@@ -59,6 +65,17 @@ namespace wdw
     mTitle = "";
     mWidth = 0;
     mHeight = 0;
+  }
+
+  void Window::clearScreen(int r, int g, int b, int a)
+  {
+    SDL_SetRenderDrawColor(renderer, r, g, b, a);
+    SDL_RenderClear(renderer);
+  }
+
+  void Window::presentRender()
+  {
+    SDL_RenderPresent(renderer);
   }
 
   // getters

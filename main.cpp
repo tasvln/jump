@@ -2,6 +2,13 @@
 
 using namespace wdw;
 
+bool loadMedia()
+{
+  bool loading = false;
+
+  return loading;
+}
+
 int main(int argc, char *argv[])
 {
   // Initialize SDL
@@ -19,6 +26,30 @@ int main(int argc, char *argv[])
     }
     else
     {
+      if (!loadMedia())
+      {
+        printf("Failed to load Images/Textures!\n");
+      }
+      else
+      {
+        bool isRunning = true;
+        SDL_Event evt;
+
+        while (isRunning)
+        {
+          while (SDL_PollEvent(&evt) != 0)
+          {
+            if (evt.type == SDL_QUIT)
+            {
+              isRunning = false;
+            }
+          }
+
+          window.clearScreen(0xFF, 0xFF, 0xFF, 0xFF);
+
+          window.presentRender();
+        }
+      }
     }
   }
 

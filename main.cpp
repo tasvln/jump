@@ -9,6 +9,11 @@ bool loadMedia()
   return loading;
 }
 
+void closeApp()
+{
+  SDL_Quit();
+}
+
 int main(int argc, char *argv[])
 {
   // Initialize SDL
@@ -52,6 +57,8 @@ int main(int argc, char *argv[])
       }
     }
   }
+
+  closeApp();
 
   return 0;
 }

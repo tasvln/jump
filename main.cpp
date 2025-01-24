@@ -31,7 +31,7 @@ int main(int argc, char *argv[])
     }
     else
     {
-      if (!loadMedia())
+      if (loadMedia())
       {
         printf("Failed to load Images/Textures!\n");
       }

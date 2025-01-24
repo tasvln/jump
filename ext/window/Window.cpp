@@ -33,12 +33,12 @@ namespace wdw
   // functions
   bool Window::init()
   {
-    window = SDL_CreateWindow(title.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE);
+    window = SDL_CreateWindow(mTitle.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, mWidth, mHeight, SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE);
 
     if (!window)
     {
       std::cerr << "Window could not be created! SDL_Error: " << SDL_GetError() << std::endl;
-      return;
+      return false;
     }
     else
     {
@@ -48,14 +48,14 @@ namespace wdw
       {
         std::cerr << "Renderer could not be created! SDL_Error: " << SDL_GetError() << std::endl;
         this->free();
-        return;
+        return false;
       }
     }
 
-    return (window != NULL && renderer != NULL)
+    return (window != NULL && renderer != NULL);
   }
 
-  bool Window::free()
+  void Window::free()
   {
     if (window)
       SDL_DestroyWindow(window);
@@ -94,9 +94,9 @@ namespace wdw
     return mHeight;
   }
 
-  SDL_Renderer *getRenderer() const
+  SDL_Renderer *Window::getRenderer() const
   {
-    return renderer;
+    return this->renderer;
   }
 
   // modifiers
@@ -110,6 +110,6 @@ namespace wdw
       done = true;
     }
 
-    return done
+    return done;
   }
 }

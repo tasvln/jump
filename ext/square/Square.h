@@ -9,7 +9,7 @@ namespace sqr
   {
   public:
     Square();
-    Square(int x, int y, int w, int h, int velY, int mGravity, SDL_Color color);
+    Square(int x, int y, int w, int h, int velY, int gravity, bool grounded, SDL_Color color);
 
     // getters
     int getX() const;
@@ -18,9 +18,9 @@ namespace sqr
     int getHeight() const;
 
     // functions
-    void jump();
     void render(SDL_Renderer *renderer);
     void handleEvent(SDL_Event &e, int jumpVel);
+    void jumpCycle(int platformY, int windowHeight);
 
   private:
     int mWidth;
@@ -29,6 +29,7 @@ namespace sqr
     int mY;
     int mVelY;
     int mGravity;
+    bool mGrounded;
     SDL_Color mColor;
   };
 }

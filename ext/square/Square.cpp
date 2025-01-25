@@ -8,17 +8,24 @@ namespace sqr
     mY = 0;
     mWidth = 100;
     mHeight = 100;
+    mVelY = 0;
+    mGravity = 1;
+    mGrounded = false;
     mColor = {0, 0, 0};
   }
 
-  Square::Square(int x, int y, int w, int h, SDL_Color color)
+  Square::Square(int x, int y, int w, int h, int velY, int gravity, bool grounded, SDL_Color color)
   {
     mX = x;
     mY = y;
     mWidth = w;
     mHeight = h;
+    mVelY = velY;
+    mGravity = gravity;
+    mGrounded = grounded;
     mColor = color;
   }
+
   int Square::getX() const
   {
     return this->mX;
@@ -39,10 +46,6 @@ namespace sqr
     return this->mHeight;
   }
 
-  void Square::jump()
-  {
-  }
-
   void Square::render(SDL_Renderer *renderer)
   {
     if (renderer)
@@ -59,20 +62,31 @@ namespace sqr
     {
       if (e.key.keysym.sym == SDLK_UP)
       {
-        // int currX = mX;
-
-        mY += jumpVel;
+        mVelY = jumpVel;
+        mGrounded = false;
       }
     }
-    else
+  }
+
+  void Square::jumpCycle(int platformY, int windowHeight)
+  {
+    if (!mGrounded)
     {
-      if (e.type == SDL_KEYUP && e.key.repeat == 0)
-      {
-        if (e.key.keysym.sym == SDLK_UP)
-        {
-          mY -= jumpVel;
-        }
-      }
+      mVelY += mGravity;
+      mY += mVelY;
+    }
+
+    if (mY < 0)
+    {
+      mVelY = 0;
+      mY = 0;
+    }
+
+    if (mY + mWidth >= platformY)
+    {
+      mY = platformY - mWidth;
+      mVelY = 0;
+      mGrounded = true;
     }
   }
 }

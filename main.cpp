@@ -40,9 +40,9 @@ int main(int argc, char *argv[])
       SDL_Color plyrColor = {0, 0, 0};
 
       Platform platform("Pltfm", windowWidth, platformHeight, 0, platformBottomY, 1, pltColor);
-      Square square(20, plyrBottomY, sqrSize, sqrSize, plyrColor);
+      Square square(20, plyrBottomY, sqrSize, sqrSize, 0, 1, false, plyrColor);
 
-      int jumpVel = -10;
+      int jumpVel = -20;
 
       if (loadMedia())
       {
@@ -62,11 +62,14 @@ int main(int argc, char *argv[])
               isRunning = false;
             }
 
-            square.handleEvent(evt);
+            square.handleEvent(evt, jumpVel);
           }
-          square.update(platform.getY());
 
           platform.movePlatform();
+
+          square.jumpCycle(platform.getY(), platform.getHeight());
+
+          cout << "y:" << square.getY() << endl;
 
           window.clearScreen(0xFF, 0xFF, 0xFF, 0xFF);
 

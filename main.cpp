@@ -31,6 +31,13 @@ int main(int argc, char *argv[])
     }
     else
     {
+      int windowWidth = window.getWidth();
+      int platformBottomY = window.getHeight() - platformHeight;
+      SDL_Renderer windowRenderer = window.getRenderer();
+
+      SDL_Color pltSpeed = 1;
+      Platfrom platform("Pltfm", windowWidth, 250, 0, platformBottomY, 1, {0, 0, 0});
+
       if (loadMedia())
       {
         printf("Failed to load Images/Textures!\n");
@@ -51,6 +58,8 @@ int main(int argc, char *argv[])
           }
 
           window.clearScreen(0xFF, 0xFF, 0xFF, 0xFF);
+
+          platform.renderPlatform(windowRenderer);
 
           window.presentRender();
         }

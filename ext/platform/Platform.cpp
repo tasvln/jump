@@ -4,8 +4,8 @@ namespace plt
 {
   Platform::Platform()
   {
-    mName = "Platform00";
-    color = {0, 0, 0};
+    mName = "Platform";
+    mColor = {0, 0, 0};
     mX = 0;
     mY = 0;
     mSpeed = 1;
@@ -13,7 +13,7 @@ namespace plt
     mHeight = 400;
   }
 
-  Platform::Platform(string &name, int w, int h, int x, int y, int speed, SDL_Color color)
+  Platform::Platform(const string &name, int w, int h, int x, int y, int speed, SDL_Color color)
   {
     mName = name;
     mColor = color;
@@ -63,8 +63,8 @@ namespace plt
   {
     if (renderer)
     {
-      SDL_SetRenderDrawColor(renderer, color.r, color.g, color.b, color.a);
-      SDL_Rect rect = {x, y, width, height};
+      SDL_SetRenderDrawColor(renderer, mColor.r, mColor.g, mColor.b, mColor.a);
+      SDL_Rect rect = {mX, mY, mWidth, mHeight};
       SDL_RenderFillRect(renderer, &rect);
     }
   }

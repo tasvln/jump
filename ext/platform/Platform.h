@@ -10,7 +10,7 @@ namespace plt
   public:
     // contructor
     Platform();
-    Platform(string &name, int w, int h, int x, int y, int speed, SDL_Color color);
+    Platform(const string &name, int w, int h, int x, int y, int speed, SDL_Color color);
 
     // getters
     int getX();
@@ -33,5 +33,5 @@ namespace plt
     int mSpeed;
     int mWidth;
     int mHeight;
-  }
+  };
 }

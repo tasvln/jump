@@ -5,5 +5,8 @@
 #include "ext/window/Window.h"
 #include "ext/platform/Platform.h"
 
+using namespace wdw;
+using namespace plt;
+
 const int SCREEN_WIDTH = 640;
 const int SCREEN_HEIGHT = 480;

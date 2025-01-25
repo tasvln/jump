@@ -25,27 +25,27 @@ namespace plt
   }
 
   // getters
-  int Platform::getX()
+  int Platform::getX() const
   {
     return this->mX;
   }
 
-  int Platform::getY()
+  int Platform::getY() const
   {
     return this->mY;
   }
 
-  int Platform::getWidth()
+  int Platform::getWidth() const
   {
     return this->mWidth;
   }
 
-  int Platform::getHeight()
+  int Platform::getHeight() const
   {
     return this->mHeight;
   }
 
-  int Platform::getSpeed()
+  int Platform::getSpeed() const
   {
     return this->mSpeed;
   }
@@ -59,7 +59,7 @@ namespace plt
     }
   }
 
-  void Platform::renderPlatform(SDL_Renderer *renderer)
+  void Platform::render(SDL_Renderer *renderer)
   {
     if (renderer)
     {
@@ -67,5 +67,12 @@ namespace plt
       SDL_Rect rect = {mX, mY, mWidth, mHeight};
       SDL_RenderFillRect(renderer, &rect);
     }
+  }
+
+  void Platform::movePlatform()
+  {
+
+    mX -= mSpeed;
+    mWidth += mSpeed;
   }
 }

@@ -1,14 +1,17 @@
 #include <SDL.h>
-#include <string>
 #include <iostream>
 
 using namespace std;
 
-namespace ply
+namespace plyr
 {
   class Player
   {
   public:
+    // constructor
+    Player();
+    Player(const string &name, int score, int mHighScore);
+
     // getters
     string getPlayerName();
     int getPlayerScore();

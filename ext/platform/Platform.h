@@ -13,17 +13,18 @@ namespace plt
     Platform(const string &name, int w, int h, int x, int y, int speed, SDL_Color color);
 
     // getters
-    int getX();
-    int getY();
-    int getWidth();
-    int getHeight();
-    int getSpeed();
+    int getX() const;
+    int getY() const;
+    int getWidth() const;
+    int getHeight() const;
+    int getSpeed() const;
 
     // modifiers
     void updateSpeed(int newSpeed);
 
     // functions
-    void renderPlatform(SDL_Renderer *renderer);
+    void render(SDL_Renderer *renderer);
+    void movePlatform();
 
   private:
     string mName;

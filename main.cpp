@@ -30,12 +30,19 @@ int main(int argc, char *argv[])
     else
     {
       int windowWidth = window.getWidth();
-      int platformHeight = 50;
+      int platformHeight = 80;
+      int sqrSize = 20;
       int platformBottomY = window.getHeight() - platformHeight;
+      int plyrBottomY = platformBottomY - sqrSize;
 
       int pltSpeed = 1;
       SDL_Color pltColor = {0, 0, 0};
+      SDL_Color plyrColor = {0, 0, 0};
+
       Platform platform("Pltfm", windowWidth, platformHeight, 0, platformBottomY, 1, pltColor);
+      Square square(20, plyrBottomY, sqrSize, sqrSize, plyrColor);
+
+      int jumpVel = -10;
 
       if (loadMedia())
       {
@@ -54,11 +61,17 @@ int main(int argc, char *argv[])
             {
               isRunning = false;
             }
+
+            square.handleEvent(evt);
           }
+          square.update(platform.getY());
+
+          platform.movePlatform();
 
           window.clearScreen(0xFF, 0xFF, 0xFF, 0xFF);
 
-          platform.renderPlatform(window.getRenderer());
+          platform.render(window.getRenderer());
+          square.render(window.getRenderer());
 
           window.presentRender();
         }

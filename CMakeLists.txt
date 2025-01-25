@@ -4,7 +4,7 @@ set(CMAKE_CXX_STANDARD 23)
 
 project(JUMP VERSION 1.0.0)
 
-add_executable(JUMP main.cpp ext/window/Window.cpp ext/platform/Platform.cpp)
+add_executable(JUMP main.cpp ext/window/Window.cpp ext/platform/Platform.cpp ext/square/Square.cpp)
 
 # Variables storing SDL framework locations
 set(SDL2

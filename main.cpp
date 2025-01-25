@@ -30,7 +30,7 @@ int main(int argc, char *argv[])
     else
     {
       int windowWidth = window.getWidth();
-      int platformHeight = 200;
+      int platformHeight = 50;
       int platformBottomY = window.getHeight() - platformHeight;
 
       int pltSpeed = 1;

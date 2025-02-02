@@ -11,10 +11,11 @@ namespace sqr
     mVelY = 0;
     mGravity = 1;
     mGrounded = false;
+    mAngle = 0;
     mColor = {0, 0, 0};
   }
 
-  Square::Square(int x, int y, int w, int h, int velY, int gravity, bool grounded, SDL_Color color)
+  Square::Square(int x, int y, int w, int h, int velY, int gravity, bool grounded, int angle, SDL_Color color)
   {
     mX = x;
     mY = y;
@@ -23,6 +24,7 @@ namespace sqr
     mVelY = velY;
     mGravity = gravity;
     mGrounded = grounded;
+    mAngle = angle;
     mColor = color;
   }
 
@@ -51,7 +53,12 @@ namespace sqr
     if (renderer)
     {
       SDL_SetRenderDrawColor(renderer, mColor.r, mColor.g, mColor.b, mColor.a);
+
       SDL_Rect rect = {mX, mY, mWidth, mHeight};
+
+      // rotate func
+      // SDL_RenderCopyEx(renderer, nullptr, nullptr, &rect, mAngle, nullptr, SDL_FLIP_NONE);
+
       SDL_RenderFillRect(renderer, &rect);
     }
   }
@@ -74,6 +81,7 @@ namespace sqr
     {
       mVelY += mGravity;
       mY += mVelY;
+      mAngle += 5;
     }
 
     if (mY < 0)
@@ -88,5 +96,11 @@ namespace sqr
       mVelY = 0;
       mGrounded = true;
     }
+  }
+
+  bool Square::checkCollision(const SDL_Rect &obs)
+  {
+    SDL_Rect playerRect = {mX, mY, mWidth, mHeight};
+    return SDL_HasIntersection(&playerRect, &obs);
   }
 }

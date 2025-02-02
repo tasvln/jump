@@ -1,5 +1,8 @@
 #include <SDL.h>
 #include <iostream>
+#include <vector>
+#include <cstdlib>
+#include <ctime>
 
 using namespace std;
 
@@ -25,6 +28,9 @@ namespace plt
     // functions
     void render(SDL_Renderer *renderer);
     void movePlatform();
+    void addObstacles(vector<SDL_Rect> &rects, const int platformY, const int windowW, int obsW, int obsH);
+    void spawnObstacles(SDL_Renderer *renderer, const vector<SDL_Rect> &rects, SDL_Color color);
+    void updateObstacles(vector<SDL_Rect> &rects, int speed, int &score);
 
   private:
     string mName;

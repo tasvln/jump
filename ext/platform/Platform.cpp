@@ -71,8 +71,45 @@ namespace plt
 
   void Platform::movePlatform()
   {
-
     mX -= mSpeed;
     mWidth += mSpeed;
+  }
+
+  void Platform::updateObstacles(vector<SDL_Rect> &rects, int speed, int &score)
+  {
+    for (auto it = rects.begin(); it != rects.end();)
+    {
+      it->x -= speed;
+
+      if (it->x + it->w < 0)
+      {
+        score++;
+        it = rects.erase(it);
+      }
+      else
+      {
+        ++it;
+      }
+    }
+  }
+
+  void Platform::addObstacles(vector<SDL_Rect> &rects, const int platformY, const int windowW, int obsW, int obsH)
+  {
+    int obsX = windowW;
+    int obsY = platformY - obsH;
+
+    rects.push_back({obsX, obsY, obsW, obsH});
+  }
+
+  void Platform::spawnObstacles(SDL_Renderer *renderer, const vector<SDL_Rect> &rects, SDL_Color color)
+  {
+    if (renderer)
+    {
+      SDL_SetRenderDrawColor(renderer, color.r, color.g, color.b, color.a);
+      for (const auto &obs : rects)
+      {
+        SDL_RenderFillRect(renderer, &obs);
+      }
+    }
   }
 }
